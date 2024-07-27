@@ -25,8 +25,8 @@ def make_copyable_GDrive_URL():
 if "download_URL" not in st.session_state:
    st.session_state.download_URL = "Modified URL will appear here"
 
-with st.form("URL Form"):
-    original_URL_text = st.text_input(" ", value="Enter URL to modify", label_visibility="hidden", key='URL')
+with st.form("URL Form", clear_on_submit=True):
+    original_URL_text = st.text_input("Enter URL to modify", key='URL')
     
     replacement_mode = st.radio(
         "Replacement mode",
@@ -35,6 +35,8 @@ with st.form("URL Form"):
         horizontal=True,
         key='copy_mode'
     )
+
+    st.divider()
     downloadable_URL_text = st.code(st.session_state.download_URL)
     submitted = st.form_submit_button("Submit", on_click=make_downloadable_GDrive_URL)
 
